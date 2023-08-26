@@ -1,7 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
-function Cast() {
+const DivCard = styled.div`
+  background-color: #f2d28b;
+  border: 3px solid #000;
+  padding: 20px;
+  & h2 {
+    font-weight: bold;
+    font-size: 40px;
+    font-family: cursive;
+  }
+`;
+const ListCard = styled.ul`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+const ItemCard = styled.li`
+  border: 3px solid #184475;
+  padding: 10px;
+  margin: 20px;
+  list-style-type: none;
+  width: 200px;
+  border-radius: 10px;
+`;
+
+const Cast = () => {
   const API_KEY = 'ea4896c7073ba93706d570dd6a3e937d';
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
@@ -16,11 +42,11 @@ function Cast() {
   }, [movieId]);
 
   return (
-    <div>
+    <DivCard>
       <h2>Cast</h2>
-      <ul>
+      <ListCard>
         {cast.map(actor => (
-          <li key={actor.id}>
+          <ItemCard key={actor.id}>
             <img
               src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
               alt={actor.name}
@@ -28,11 +54,11 @@ function Cast() {
             <br />
             <p>Nombre:{actor.name} </p>
             <p>Character: {actor.character}</p>
-          </li>
+          </ItemCard>
         ))}
-      </ul>
-    </div>
+      </ListCard>
+    </DivCard>
   );
-}
+};
 
 export default Cast;

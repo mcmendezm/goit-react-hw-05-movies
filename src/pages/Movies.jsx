@@ -1,7 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-function Movies() {
+const DivMovies = styled.div`
+  & h2 {
+    font-size: 40px;
+    font-family: cursive;
+    margin: 30px;
+  }
+  & input {
+    margin-left: 50px;
+    margin-right: 10px;
+    height: 27px;
+    width: 200px;
+    padding-left: 20px;
+  }
+  & button {
+    background-color: #184475;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    &:hover {
+      opacity: 0.9;
+      padding: 12px 22px;
+    }
+  }
+`;
+
+const Movies = () => {
   const API_KEY = 'ea4896c7073ba93706d570dd6a3e937d';
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -16,7 +43,7 @@ function Movies() {
   };
 
   return (
-    <div>
+    <DivMovies>
       <h2>Search Movies</h2>
       <div>
         <input
@@ -34,8 +61,8 @@ function Movies() {
           </li>
         ))}
       </ul>
-    </div>
+    </DivMovies>
   );
-}
+};
 
 export default Movies;

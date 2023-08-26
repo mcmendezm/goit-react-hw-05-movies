@@ -1,7 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
-function MovieDetails() {
+const DivButton = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 50px;
+  & button {
+    background-color: #184475;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-right: 30px;
+    &:hover {
+      opacity: 0.9;
+      padding: 12px 22px;
+    }
+  }
+`;
+const DivContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 30px;
+  & h2 {
+    font-weight: bold;
+    font-size: 40px;
+    font-family: cursive;
+  }
+  & h3 {
+    font-size: 30px;
+    font-family: cursive;
+  }
+  & img {
+    padding-right: 40px;
+  }
+`;
+const DivInfo = styled.div`
+  background-color: #0081df;
+  height: 100%;
+  align-item: center;
+  padding: 30px;
+  & h3 {
+    font-size: 30px;
+    font-family: cursive;
+  }
+`;
+
+const MovieDetails = () => {
   const API_KEY = 'ea4896c7073ba93706d570dd6a3e937d';
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
@@ -15,13 +63,15 @@ function MovieDetails() {
 
   return (
     <div>
-      <Link to="/">
-        {' '}
-        <button>Back</button>
-      </Link>
+      <DivButton>
+        <Link to="/">
+          {' '}
+          <button>Go Back</button>
+        </Link>
+      </DivButton>
       <div>
         {movieDetails && (
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '15px' }}>
+          <DivContent>
             <img
               src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
               alt={movieDetails.title}
@@ -41,12 +91,11 @@ function MovieDetails() {
                 ))}
               </ul>
             </div>
-          </div>
+          </DivContent>
         )}
       </div>
-      <hr />
-      <div>
-        <p>Additional information</p>
+      <DivInfo>
+        <h3>Additional information</h3>
         <ul>
           <li>
             <Link to="cast">Cast</Link>
@@ -56,10 +105,9 @@ function MovieDetails() {
           </li>
         </ul>
         <Outlet />
-      </div>
-      <hr />
+      </DivInfo>
     </div>
   );
-}
+};
 
 export default MovieDetails;

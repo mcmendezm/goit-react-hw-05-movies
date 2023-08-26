@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Home() {
+const Home = () => {
   const API_KEY = 'ea4896c7073ba93706d570dd6a3e937d';
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`)
       .then(response => response.json())
-      .then(data => setPopularMovies(data.results))
+      .then(data => {
+        const filteredMovies = data.results.filter(movie => movie.title);
+        setPopularMovies(filteredMovies);
+      })
       .catch(error => console.error('Error fetching popular movies:', error));
   }, []);
 
@@ -24,6 +27,6 @@ function Home() {
       </ul>
     </div>
   );
-}
+};
 
 export default Home;
