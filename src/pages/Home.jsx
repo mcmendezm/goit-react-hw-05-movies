@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+const DivHome = styled.div`
+  padding: 20px;
+  & h2 {
+    font-weight: bold;
+    font-size: 40px;
+    font-family: cursive;
+  }
+`;
 const Home = () => {
   const API_KEY = 'ea4896c7073ba93706d570dd6a3e937d';
   const [popularMovies, setPopularMovies] = useState([]);
@@ -16,7 +25,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <DivHome>
       <h2>Popular Movies</h2>
       <ul>
         {popularMovies.map(movie => (
@@ -25,7 +34,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </DivHome>
   );
 };
 
